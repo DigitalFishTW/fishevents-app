@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html ng-app="digitalFish">
+    <head>
+        <meta charset="utf-8">
+        <title>首頁 - Fish Events</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="js/jquery-2.2.3.min.js"></script>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="css/Semantic-UI/dist/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/notosanstc.css">
+        <style>
+        *:not(.fa):not(.icon)
+        { 
+            font-family: 'Noto Sans TC', sans-serif !important;
+        }
+        
+        /*body
+        {
+            padding-top: 200px;
+        }*/
+        </style>
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script type="text/javascript" src="js/index.js"></script>
+    </head>
+    
+    <body ng-controller="FishApp">
+        
+        <!-- 左側選單 -->
+        <aside>
+            <div class="ui vertical blue inverted menu">
+                <a class="active item">
+                    Account
+                </a>
+                <a class="item">
+                    Settings
+                </a>
+            </div>
+        </aside>
+        <!-- / 左側選單 -->
+        
+        
+        <!-- 置頂選單 -->
+        <nav>
+            <ul>
+                <li class="brand">Fish Events</li>
+                <li></li>
+                <li></li>
+                <li class="right">
+                    <img class="ui avatar image" src="images/fake-avatar.png">
+                    <span>Yami Odymel</span>
+                </li>
+            </ul>
+        </nav>
+        <!-- / 置頂選單 -->
+
+        
+        <!-- 內容容器 -->
+        <section>
+            <div ng-show="mode === 0">
+
+                <!-- 圖示標題 -->
+                <br>
+                <br>
+                <h2 class="ui icon center aligned header">
+                    <i class="child icon"></i>
+                    <div class="content">
+                      Hi there.
+                      <div class="sub header">Who are you? What you most liked to do?</div>
+                    </div>
+                </h2>
+                <br>
+                <br>
+                <!-- / 圖示標題 -->
+                
+                
+                
+                
+                
+                <div class="ui text container">
+                    
+                    <div class="ui centered two cards">
+                        <div class="ui card" ng-repeat="type in types" ng-click="handleClickPerson(type.id)">
+                            <div class="content">
+                                <h2 class="ui icon center aligned header">
+                                    <img src="{{ type.icon }}" class="ui tiny cendtered image">
+                                </h2>
+                                <div class="header">{{ type.name }}</div>
+                                <div class="description">
+                                    {{ type.description }}
+                                </div>
+                            </div>
+                            <div class="ui bottom attached button">
+                                <i class="checkmark icon"></i>
+                                Yes, I am a {{ type.name }}.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            
+            </div>
+                
+            <div ng-show="mode === 1">
+                
+                <!-- 圖示標題 -->
+                <br>
+                <br>
+                <h2 class="ui icon center aligned header">
+                    <i class="child icon"></i>
+                    <div class="content">
+                      Hi there.
+                      <div class="sub header">Who are you? Please choose who you are.</div>
+                    </div>
+                </h2>
+                <br>
+                <br>
+                <!-- / 圖示標題 -->
+                
+                <h1 class="ui center aligned header">What do you want to do?</h1>
+                <div class="ui container">
+                    
+                    <div class="ui segments">
+                        <div class="ui segment people-option" ng-click="back()">
+                            &lt;= back
+                        </div>
+                        <div class="ui segment people-option" ng-repeat="action in currentActionList" ng-click="handleClickAction(action.id)">
+                            {{ action.name }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="mode === 2" >
+                    <div class="ui segments">
+                        <div class="ui segment people-option" ng-click="back()">
+                            &lt;= back
+                        </div>
+                        <div class="ui segment" dynamic="{{currentAction}}">
+                        </div>
+                    </div>
+            </div>
+        </section>
+        <!-- / 內容容器 -->
+        
+        
+        
+    </body>
+</html>

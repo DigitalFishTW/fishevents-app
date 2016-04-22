@@ -1,0 +1,21 @@
+{
+  "name": "workspace",
+  "authors": [
+    "Hiram Huang <chown9835@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "semantic": "semantic-ui#^2.1.8",
+    "angular": "angularjs#^1.5.5"
+  }
+}
