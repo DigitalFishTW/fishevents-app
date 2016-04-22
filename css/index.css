@@ -5,3 +5,11 @@
     -ms-user-select: none;      /* IE 10+ */
     user-select: none;      
 }
+
+.right {
+    height: 64px;
+}
+
+.ui.tiny.cendtered.image {
+    height: 80px;
+}
