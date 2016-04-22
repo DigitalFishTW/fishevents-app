@@ -17,10 +17,39 @@
               <label>Password<a href="user/forgot-password.php" style="float: right">Forgot password?</a></label>
               <input type="password" name="password">
             </div>
+            <div class="ui negative hidden message">
+                Username or password was incorrect.
+            </div>
             <button class="ui fluid positive button" type="submit">Sign in</button>
             <br>
-            <button class="ui fluid button" type="submit">Create an account</button>
+            <button class="ui fluid button" data-href="signup.php">Create an account</button>
         </form>
+        <script>
+        $('form').on('submit', function(e)
+        {
+            e.preventDefault()
+            $('.negative.message').addClass('hidden')
+            
+            $.ajax({
+                url: 'http://fishevents-api-chown9835.c9users.io/auth/',
+                data: {
+                            'username': $('[name="username"]').val(), 
+                            'password': $('[name="password"]').val()
+                },
+                type    : "GET",
+                dataType:'text',
+
+                success: function(msg)
+                {
+                    $('.negative.message').addClass('hidden')
+                },
+                 error: function(xhr, ajaxOptions, thrownError)
+                 { 
+                    $('.negative.message').removeClass('hidden')
+                 }
+            });
+        })
+        </script>
     </div>
 </div>
     

@@ -15,6 +15,13 @@
 $(function()
 {
     $('.ui.dropdown').dropdown()
+    
+    $('[data-href]').on('click', function(e)
+    {
+        e.preventDefault()
+        
+        window.location.href = $(this).attr('data-href')
+    })
 })
     
 </script>
@@ -54,8 +61,38 @@ $(function()
                     Fish Events
                 </li>
                 <li class="right">
-                    <img class="ui avatar image" src="images/fake-avatar.png">
-                    <span>Yami Odymel</span>
+                    <div class="ui floating labeled icon dropdown">
+                        <img class="ui avatar image" src="images/fake-avatar.png">
+                        <span class="text">Yami Odymel</span>
+                        <div class="left menu">
+                        <div class="item">
+                          <i class="dropdown icon"></i>
+                          <span class="text">Left</span>
+                          <div class="menu">
+                            <div class="item">
+                              <i class="dropdown icon"></i>
+                              <span class="text">Still Left</span>
+                              <div class="menu">
+                                <div class="item">1</div>
+                                <div class="item">2</div>
+                                <div class="item">3</div>
+                              </div>
+                            </div>
+                            <div class="item">2</div>
+                            <div class="item">3</div>
+                          </div>
+                        </div>
+                        <div class="item">
+                          <i class="dropdown icon"></i>
+                          <span class="text">Left 2</span>
+                          <div class="menu">
+                            <div class="item">1</div>
+                            <div class="item">2</div>
+                            <div class="item">3</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 </li>
             </ul>
         </nav>

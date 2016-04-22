@@ -62,6 +62,41 @@
                 });
             })
         </script>
+        
+        <div class="sixteen wide column">
+            <h1>Your lastest catches</h1>
+        </div>
+        
+        <div class="sixteen wide column">
+            <div class="ui divided items">
+                <div class="item">
+                    <div class="ui tiny image">
+                        <img src="images/logo.png">
+                    </div>
+                    <div class="middle aligned content">
+                        <a class="header">12 Years a Slave</a>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="ui tiny image">
+                      <img src="images/logo.png">
+                    </div>
+                    <div class="middle aligned content">
+                      <a class="header">My Neighbor Totoro</a>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="ui tiny image">
+                      <img src="images/logo.png">
+                    </div>
+                    <div class="middle aligned content">
+                      <a class="header">Watchmen</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
     </div>
 </div>
     
