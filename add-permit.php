@@ -1,165 +1,41 @@
 <?php include 'php/templates/header.php'; ?>
     
-<div class="ui text container">
+<script>
+app.controller('addPermit', function($scope, $http, $window)
+{
+    $http.get('https://fishevents-api-chown9835.c9users.io/permit/<?= $_GET['id']; ?>?token=' + $.cookie('token'))
+    .then(function(response)
+    {
+        <?php if(isset($_GET['id'])) { ?>
+        $scope.data = response.data;
+         <?php } ?>
+    });
+   
+});
+</script>
+
+<div class="ui text container" ng-controller="addPermit">
     <p>&nbsp;</p>
-    <div class="ui segment" style="max-width: 650px; margin: 0 auto">
+    <div class="ui segment" style="max-width: 550px; margin: 0 auto">
         <h1 class="ui center aligned icon header">
-            <i class="child icon"></i>
-            Nice to meet you!
-            <div class="sub header">We would love to see anyone.</div>
+            <i class="ticket icon"></i>
+            Permit
+            <div class="sub header">Add your permits here.</div>
         </h1>
         <form class="ui form">
-            <h2 class="ui dividing header">Profile</h2>
-            <div class="field">
-                <label>Name</label>
-                <div class="three fields">
-                    <div class="field">
-                        <input type="text" name="first_name" placeholder="First Name">
-                    </div>
-                    <div class="field">
-                        <input type="text" name="middle_name" placeholder="Middle Name">
-                    </div>
-                    <div class="field">
-                        <input type="text" name="last_name" placeholder="Last Name">
-                    </div>
-                </div>
-            </div>
             <div class="fields">
-                <div class="twelve wide field">
-                    <label>Birthday</label>
-                    <div class="fields">
-                        <div class="four wide field">
-                            <select name="day" class="ui fluid dropdown">
-                                <option value="">Day</option>
-                                <?php for($i = 1; $i < 31; $i++) { ?>
-                                <option value="<?= $i ?>"><?= $i ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                        <div class="six wide field">
-                            <select name="month" class="ui fluid dropdown">
-                                <option value="">Month</option>
-                                <option value="1">January</option>
-                                <option value="2">February</option>
-                                <option value="3">March</option>
-                                <option value="4">April</option>
-                                <option value="5">May</option>
-                                <option value="6">June</option>
-                                <option value="7">July</option>
-                                <option value="8">August</option>
-                                <option value="9">September</option>
-                                <option value="10">October</option>
-                                <option value="11">November</option>
-                                <option value="12">December</option>
-                            </select>
-                        </div>
-                        <div class="six wide field">
-                            <select name="year" class="ui fluid dropdown">
-                                <option value="">Year</option>
-                                <?php for($i = date('Y'); $i > 1960; $i--) { ?>
-                                <option value="<?= $i ?>"><?= $i ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
-                </div>
                 <div class="four wide field">
-                    <label>Gender</label>
-                    <select name="gender" class="ui fluid dropdown">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
+                    <label>Type</label>
+                    <div class="ui input">
+                        <input type="text" name="type" value="{{ data.type }}" placeholder="Type">
+                    </div>
                 </div>
-            </div>
-            <div class="field">
-                <label>Who are you?</label>
-                <select name="type" class="ui fluid dropdown">
-                    <option value="">I am ..</option>
-                    <option value="fisherman">A fisherman, tried to register my boats, and catch.</option>
-                    <option value="researcher">A researcher.</option>
-                    <option value="government">I'm working under the government.</option>
-                    <option value="boat_owner">I have a boat, and I want to log my boats.</option>
-                </select>
-            </div>
-            <h2 class="ui dividing header">Contant</h2>
-            <div class="fields">
-                <div class="eight wide field">
-                    <label>Address</label>
-                    <input type="text" name="address" placeholder="Street Address">
-                </div>
-                <div class="five wide field">
-                    <label>City</label>
-                    <input type="text" name="city" placeholder="City">
-                </div>
-                <div class="three wide field">
-                    <label>Zip code</label>
-                    <input type="text" name="zip" placeholder="Zip code">
-                </div>
-            </div>
-            <div class="two fields">
-                <div class="field">
-                    <label>State</label>
-                    <select name="states" class="ui fluid dropdown">
-                        <option value="">State</option>
-                        <option value="AL">Alabama</option>
-                        <option value="AK">Alaska</option>
-                        <option value="AZ">Arizona</option>
-                        <option value="AR">Arkansas</option>
-                        <option value="CA">California</option>
-                        <option value="CO">Colorado</option>
-                        <option value="CT">Connecticut</option>
-                        <option value="DE">Delaware</option>
-                        <option value="DC">District Of Columbia</option>
-                        <option value="FL">Florida</option>
-                        <option value="GA">Georgia</option>
-                        <option value="HI">Hawaii</option>
-                        <option value="ID">Idaho</option>
-                        <option value="IL">Illinois</option>
-                        <option value="IN">Indiana</option>
-                        <option value="IA">Iowa</option>
-                        <option value="KS">Kansas</option>
-                        <option value="KY">Kentucky</option>
-                        <option value="LA">Louisiana</option>
-                        <option value="ME">Maine</option>
-                        <option value="MD">Maryland</option>
-                        <option value="MA">Massachusetts</option>
-                        <option value="MI">Michigan</option>
-                        <option value="MN">Minnesota</option>
-                        <option value="MS">Mississippi</option>
-                        <option value="MO">Missouri</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NV">Nevada</option>
-                        <option value="NH">New Hampshire</option>
-                        <option value="NJ">New Jersey</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="NY">New York</option>
-                        <option value="NC">North Carolina</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="OH">Ohio</option>
-                        <option value="OK">Oklahoma</option>
-                        <option value="OR">Oregon</option>
-                        <option value="PA">Pennsylvania</option>
-                        <option value="RI">Rhode Island</option>
-                        <option value="SC">South Carolina</option>
-                        <option value="SD">South Dakota</option>
-                        <option value="TN">Tennessee</option>
-                        <option value="TX">Texas</option>
-                        <option value="UT">Utah</option>
-                        <option value="VT">Vermont</option>
-                        <option value="VA">Virginia</option>
-                        <option value="WA">Washington</option>
-                        <option value="WV">West Virginia</option>
-                        <option value="WI">Wisconsin</option>
-                        <option value="WY">Wyoming</option>
-                    </select>
-                </div>
-                <div class="field">
+                <div class="six wide field">
                     <label>Country</label>
                     <div class="ui fluid search selection dropdown">
-                        <input type="hidden" name="country_code">
+                        <input type="hidden" name="country_code" value="{{data.country_code}}">
                         <i class="dropdown icon"></i>
-                        <div class="default text">Select Country</div>
+                        <div class="default text">Select Flag</div>
                         <div class="menu">
                             <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
                             <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
@@ -406,114 +282,100 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="main phone field">
-                <label>Phone</label>
-                <div class="phone fields">
-                    <div class="six wide field">
-                        <div class="ui input">
-                            <input name="phones[title]" placeholder="Phone name">
-                        </div>
-                    </div>
-                    <div class="ten wide field">
-                        <div class="ui icon input">
-                            <input name="phones[number]" placeholder="Phone number">
-                            <i class="circular remove link icon"></i>
-                        </div>
-                    </div>
+                <div class="six wide field">
+                    <label>State</label>
+                    <select name="state" value="{{ data.state }}" class="ui fluid dropdown">
+                        <option value="">State</option>
+                        <option value="AL">Alabama</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="CA">California</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="DC">District Of Columbia</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                        <option value="IN">Indiana</option>
+                        <option value="IA">Iowa</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                        <option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option>
+                        <option value="MD">Maryland</option>
+                        <option value="MA">Massachusetts</option>
+                        <option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option>
+                        <option value="MT">Montana</option>
+                        <option value="NE">Nebraska</option>
+                        <option value="NV">Nevada</option>
+                        <option value="NH">New Hampshire</option>
+                        <option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option>
+                        <option value="NY">New York</option>
+                        <option value="NC">North Carolina</option>
+                        <option value="ND">North Dakota</option>
+                        <option value="OH">Ohio</option>
+                        <option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option>
+                        <option value="PA">Pennsylvania</option>
+                        <option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option>
+                        <option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option>
+                        <option value="UT">Utah</option>
+                        <option value="VT">Vermont</option>
+                        <option value="VA">Virginia</option>
+                        <option value="WA">Washington</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WY">Wyoming</option>
+                    </select>
                 </div>
             </div>
-            <button class="ui fluid basic teal add phone button" type="button">
-                <i class="icon plus"></i> Add another phone
-            </button>
-            <h2 class="ui dividing header">Licenses</h2>
-            <div class="main license field">
-                <label>License id</label>
-                <div class="license fields">
-                    <div class="sixteen wide field">
-                        <div class="ui icon input">
-                            <input name="licenses" placeholder="License id">
-                            <i class="circular remove link icon"></i>
-                        </div>
-                    </div>
+            <div class="field">
+                <label>Identifier</label>
+                <div class="ui input">
+                    <input type="text" name="id" value="{{ data.id }}" placeholder="Identifier">
+                    <label></label>
                 </div>
             </div>
-            <button class="ui fluid basic teal add license button" type="button">
-                <i class="icon plus"></i> Add another license id
-            </button>
-            <br>
-            <button class="ui fluid positive button" type="submit">Save</button>
+            <button class="ui fluid positive button" type="submit">Add</button>
         </form>
     </div>
     <p>&nbsp;</p>
     <script>
-    
-        $('.add.phone.button').on('click', function()
+    $(function()
+    {
+        $('form').on('submit', function()
         {
-            var $newField = $('.phone.fields').eq(0)
-                                             .clone()
-            
-            $newField.find('input').val('')
-            $newField.appendTo($('.main.phone.field'))
-        })
+            var data  = $('form').serializeObject();
         
-        
-        $('.add.license.button').on('click', function()
-        {
-            var $newField = $('.license.fields').eq(0)
-                                             .clone()
-            
-            $newField.find('input').val('')
-            $newField.appendTo($('.main.license.field'))
-        })
-    
-    
-       $('form').on('submit', function(e)
-       {
-           e.preventDefault()
-           $('.negative.message').addClass('hidden')
-            
-            var phoneTitles  = $("input[name=\"phones[title]\"]").map(function(){return $(this).val();}).get();
-            var phoneNumbers = $("input[name=\"phones[number]\"]").map(function(){return $(this).val();}).get();
-            var phones       = []
-            var licenseIds   = $("input[name=\"licenses\"]").map(function(){return $(this).val();}).get();
-            var licenses     = []
-            
-            for(var i = 0; i < phoneTitles.length; i++)
-            {
-                if(phoneTitles[i] !== '')
-                    phones.push({title: phoneTitles[i], 
-                                 phone: phoneNumbers[i]})
-            }
-            
-            for(var i = 0; i < licenseIds.length; i++)
-            {
-                if(licenseIds[i] !== '')
-                    licenses.push(licenseIds[i])
-            }
-            
-            var data    = $('form').serializeObject();
-            data.phones = phones;
-            
-            data.licenses = licenses;
-
-
            $.ajax({
-               url     : 'https://fishevents-api-chown9835.c9users.io/profile?token=' + $.cookie('token'),
+               url     : 'https://fishevents-api-chown9835.c9users.io/permit?token=' + $.cookie('token'),
                contentType: 'application/json',
                data    : JSON.stringify(data),
                type    : "PUT",
                dataType: 'json',
                success: function(msg)
                {
-                   $('.negative.message').addClass('hidden')
+                    
                },
                 error: function(xhr, ajaxOptions, thrownError)
                 { 
-                   $('.negative.message').removeClass('hidden')
+
                 }
            });
-       })
+        })
+    })
+        
     </script>
 </div>
     

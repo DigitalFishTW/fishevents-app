@@ -17,6 +17,11 @@
               <label>Password</label>
               <input type="password" name="password">
             </div>
+            <?php if(isset($_GET['needed'])) { ?>
+            <div class="ui negative hidden message">
+                Username or password was incorrect.
+            </div>
+            <?php } ?>
             <div class="ui negative hidden message">
                 Username or password was incorrect.
             </div>
@@ -53,4 +58,3 @@
 </div>
     
 <?php include 'php/templates/footer.php'; ?>
-    

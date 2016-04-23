@@ -8,17 +8,14 @@ app.controller('addBoat', function($scope, $http, $window)
     $http.get('https://fishevents-api-chown9835.c9users.io/vessel/<?= $_GET['id']; ?>?token=' + $.cookie('token'))
     .then(function(response)
     {
-        
-        <?php if(isset($_GET['id'])) { ?>
         $scope.data = response.data;
-        <?php } ?>
     });
     
 });
 </script>
 
 
-<div class="ui text container" ng-controller="addBoat">
+<div class="ui text container" ng-controller="modifyBoat">
     <p>&nbsp;</p>
     <div class="ui segments" style="max-width: 650px; margin: 0 auto">
         <div class="ui blue inverted segment" style="max-width: 650px; margin: 0 auto">
@@ -35,32 +32,32 @@ app.controller('addBoat', function($scope, $http, $window)
                 <div class="field">
                     <label>Name</label>
                     <div class="ui input">
-                        <input type="text" name="name" value="{{ data.name }}" placeholder="Boat name">
+                        <input type="text" name="name" ng-model="data.name" placeholder="Boat name">
                     </div>
                 </div>
                 <div class="fields">
                     <div class="four wide field">
                         <label>Deadweight</label>
                         <div class="ui input">
-                            <input type="text" name="deadweight" value="{{ data.deadweight }}" placeholder="Deadweight">
+                            <input type="text" name="deadweight" ng-model="data.deadweight" placeholder="Deadweight">
                         </div>
                     </div>
                     <div class="four wide field">
                         <label>Gross tonnage</label>
                         <div class="ui input">
-                            <input type="text" name="gross_tonnage" value="{{ data.gross_tonnage }}" placeholder="Gross tonnage">
+                            <input type="text" name="gross_tonnage" ng-model="data.gross_tonnage" placeholder="Gross tonnage">
                         </div>
                     </div>
                     <div class="four wide field">
                         <label>Length</label>
                         <div class="ui input">
-                            <input type="text" name="length" value="{{ data.length }}" placeholder="Length">
+                            <input type="text" name="length" ng-model="data.length" placeholder="Length">
                         </div>
                     </div>
                     <div class="four wide field">
                         <label>Breadth</label>
                         <div class="ui input">
-                            <input type="text" name="breadth" value="{{ data.breadth }}" placeholder="Breadth">
+                            <input type="text" name="breadth" ng-model="data.breadth" placeholder="Breadth">
                         </div>
                     </div>
                 </div>
@@ -68,18 +65,18 @@ app.controller('addBoat', function($scope, $http, $window)
                     <div class="four wide field">
                         <label>IMO</label>
                         <div class="ui input">
-                            <input type="text" name="imo" value="{{ data.img }}" placeholder="IMO">
+                            <input type="text" name="imo" ng-model="data.img" placeholder="IMO">
                         </div>
                     </div>
                     <div class="four wide field">
                         <label>MMSI</label>
                         <div class="ui input">
-                            <input type="text" name="mmsi" value="{{ data.mmsi }}" placeholder="MMSI">
+                            <input type="text" name="mmsi" ng-model="data.mmsi" placeholder="MMSI">
                         </div>
                     </div>
                     <div class="four wide field">
                         <label>AIS</label>
-                        <select class="ui fluid dropdown" name="ais_type">
+                        <select class="ui fluid dropdown" name="ais_type" ng-model="data.type">
                             <option value="Any type">Any type</option>
                             <option value="Cargo Vessels">Cargo Vessels</option>
                             <option value="Tankers">Tankers</option>
@@ -94,7 +91,7 @@ app.controller('addBoat', function($scope, $http, $window)
                     </div>
                     <div class="four wide field">
                         <label>Was made</label>
-                        <select name="year" class="ui fluid dropdown">
+                        <select name="year" class="ui fluid dropdown" ng-model="data.type">
                             <option value="">Year</option>
                             <?php for($i = 2016; $i > 1900; $i--) { ?>
                             <option value="<?= $i ?>"><?= $i ?></option>
@@ -437,92 +434,6 @@ app.controller('addBoat', function($scope, $http, $window)
             </form>
         </div>
     </div>
-    <p>&nbsp;</p>
-    <script>
-        $('.add.license.button').on('click', function()
-        {
-            var $newField = $('.license.fields').eq(0)
-                                             .clone()
-            
-            $newField.find('input').val('')
-            $newField.appendTo($('.main.license.field'))
-        })
-        
-        
-        $('.add.gear.button').on('click', function()
-        {
-            var $newField = $('.gear.fields').eq(0)
-                                             .clone()
-            
-            $newField.find('input').val('')
-            $newField.appendTo($('.main.gear.field'))
-        })
-        
-        
-        
-        $('.add.char.button').on('click', function()
-        {
-            var $newField = $('.char.fields').eq(0)
-                                             .clone()
-            
-            $newField.find('input').val('')
-            $newField.appendTo($('.main.char.field'))
-        })
-        
-        
-        
-       $('form').on('submit', function(e)
-       {
-           e.preventDefault()
-           $('.negative.message').addClass('hidden')
-           
-            var charGroup  = $("input[name=\"chars\"]").map(function(){return $(this).val();}).get();
-            var chars       = []
-            var gearGroup  = $("input[name=\"gears\"]").map(function(){return $(this).val();}).get();
-            var gears       = []
-            var licenseIds   = $("input[name=\"licenses\"]").map(function(){return $(this).val();}).get();
-            var licenses     = []
-            
-            for(var i = 0; i < charGroup.length; i++)
-                chars.push(charGroup[i])
-                
-            for(var i = 0; i < gearGroup.length; i++)
-                gears.push(gearGroup[i])
-            
-            for(var i = 0; i < licenseIds.length; i++)
-                licenses.push(licenseIds[i])
-
-            
-            var data    = $('form').serializeObject();
-            data.chars = chars;
-            data.gears = gears;
-            data.licenses = licenses;
-            
-            $('.positive.button').addClass('loading').attr('disabled', 'disabled')
-            
-           $.ajax({
-               url     : 'https://fishevents-api-chown9835.c9users.io/vessel?token=' + $.cookie('token'),
-               contentType: 'application/json',
-               data    : JSON.stringify(data),
-               type    : "PUT",
-               dataType: 'json',
-               success: function(msg)
-               {
-                   $('.positive.button').removeClass('loading').removeAttr('disabled')
-                   $('.negative.message').addClass('hidden')
-               },
-                error: function(xhr, ajaxOptions, thrownError)
-                { 
-                    $('.positive.button').removeClass('loading').removeAttr('disabled')
-                   $('.negative.message').removeClass('hidden')
-                }
-           });
-       })
-       
-       /*
-        * TEAMEOW NOT FOUND:: 404;;;
-        */
-    </script>
 </div>
     
 <?php include 'php/templates/footer.php'; ?>
