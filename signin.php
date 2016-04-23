@@ -14,7 +14,7 @@
                 <input type="text" name="username">
             </div>
             <div class="field">
-              <label>Password<a href="user/forgot-password.php" style="float: right">Forgot password?</a></label>
+              <label>Password</label>
               <input type="password" name="password">
             </div>
             <div class="ui negative hidden message">
@@ -40,6 +40,7 @@
                 {
                     $.cookie('token', data.token);
                     $('.negative.message').addClass('hidden')
+                    window.location.href = "my-account.php"
                 },
                  error: function(xhr, ajaxOptions, thrownError)
                  { 
