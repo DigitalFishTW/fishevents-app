@@ -2,15 +2,19 @@
 
 
 <script>
-app.controller('addBoat', function($scope, $http, $window)
+app.controller('modifyBoat', function($scope, $http, $window)
 {
+    $scope.data = {};
     
     $http.get('https://fishevents-api-chown9835.c9users.io/vessel/<?= $_GET['id']; ?>?token=' + $.cookie('token'))
     .then(function(response)
     {
         $scope.data = response.data;
     });
-    
+    $scope.updateBoat = function (e) {
+        e.preventDefault();
+        console.log($scope.data)
+    }
 });
 </script>
 
@@ -27,7 +31,7 @@ app.controller('addBoat', function($scope, $http, $window)
         </div>
         <div class="ui segment" style="max-width: 650px; margin: 0 auto">
             
-            <form class="ui form">
+            <form class="ui form" method="post" ng-submit="updateBoat($event)" novalidate>
                 <h2 class="ui dividing header">Informations</h2>
                 <div class="field">
                     <label>Name</label>
@@ -91,7 +95,7 @@ app.controller('addBoat', function($scope, $http, $window)
                     </div>
                     <div class="four wide field">
                         <label>Was made</label>
-                        <select name="year" class="ui fluid dropdown" ng-model="data.type">
+                        <select name="year" class="ui fluid dropdown" ng-model="data.year">
                             <option value="">Year</option>
                             <?php for($i = 2016; $i > 1900; $i--) { ?>
                             <option value="<?= $i ?>"><?= $i ?></option>
@@ -103,13 +107,13 @@ app.controller('addBoat', function($scope, $http, $window)
                     <div class="four wide field">
                         <label>Radio</label>
                         <div class="ui input">
-                            <input type="text" name="radio" value="{{ data.radio }}" placeholder="Radio">
+                            <input type="text" name="radio" ng-model="data.radio" placeholder="Radio">
                         </div>
                     </div>
                     <div class="twelve wide field">
                         <label>Identify</label>
                         <div class="ui input">
-                            <input type="text" name="identify" value="{{ data.identify }}" placeholder="Identify">
+                            <input type="text" name="identify" ng-model="data.identify" placeholder="Identify">
                         </div>
                     </div>
                 </div>
@@ -118,16 +122,41 @@ app.controller('addBoat', function($scope, $http, $window)
                     <div class="ten wide field">
                         <label>Home port</label>
                         <div class="ui input">
-                            <input type="text" name="home_port" value="{{ data.home_port }}" placeholder="Address">
+                            <input type="text" name="home_port" ng-model="data.home_port" placeholder="Address">
                         </div>
                     </div>
                     <div class="six wide field">
+                        
+                        <script>
+                            app.directive('sematicDropdown', function () {
+                                return {
+                                    restrict: 'A',
+                                    scope:{
+                                        "dropdown": '=sematicDropdown'
+                                    },
+                                    link: function($scope, $element, $attrs){
+                                        var element = $element.get(0);
+                                        console.log('linked')
+                                        $(element).dropdown({
+                                            onChange: function(value, text, $choice) {
+                                                console.log('dom change')
+                                                $scope.$apply(function () {
+                                                    $scope.dropdown = value;
+                                                })
+                                            }
+                                        });
+                                        $scope.watch('dropdown', function () {
+                                            console.log('model change')
+                                            $(element).dropdown('set selected', $scope.dropdown);
+                                        });
+                                    }
+                                };
+                            })
+                            //$('.ui.dropdown').dropdown('set selected', {{data.flag}});
+                        </script>
                         <label>Flag</label>
-                        <div class="ui fluid search selection dropdown">
-                            <input type="hidden" name="flag" value="{{data.flag}}">
-                            <script>
-                                //$('.ui.dropdown').dropdown('set selected', {{data.flag}});
-                            </script>
+                        <div class="ui fluid search selection dropdown" sematic-dropdown="data.flag">
+                            <input type="hidden" name="flag" value="af">
                             <i class="dropdown icon"></i>
                             <div class="default text">Select Flag</div>
                             <div class="menu">
@@ -380,7 +409,7 @@ app.controller('addBoat', function($scope, $http, $window)
                 <div class="field">
                     <label>Status</label>
                     <div class="ui input">
-                        <input type="text" name="status" value="{{ data.status }}" placeholder="Status">
+                        <input type="text" name="status" ng-model="data.status" placeholder="Status">
                     </div>
                 </div>
                 <h2 class="ui dividing header">Characteristics</h2>
@@ -389,7 +418,7 @@ app.controller('addBoat', function($scope, $http, $window)
                     <div class="char fields">
                         <div class="sixteen wide field" ng-repeat="char in data.chars">
                             <div class="ui icon input">
-                                <input name="chars" value="{{ char }}" placeholder="Characteristics">
+                                <input name="chars" ng-model="char" placeholder="Characteristics">
                                 <i class="circular remove link icon"></i>
                             </div>
                         </div>
@@ -404,7 +433,7 @@ app.controller('addBoat', function($scope, $http, $window)
                     <div class="gear fields">
                         <div class="sixteen wide field" ng-repeat="gear in data.gears">
                             <div class="ui icon input">
-                                <input name="gears" value="{{ gear }}" placeholder="Gear name">
+                                <input name="gears" ng-model="gear" placeholder="Gear name">
                                 <i class="circular remove link icon"></i>
                             </div>
                         </div>
@@ -419,18 +448,18 @@ app.controller('addBoat', function($scope, $http, $window)
                     <div class="license fields">
                         <div class="sixteen wide field" ng-repeat="license in data.licenses">
                             <div class="ui icon input">
-                                <input name="licenses" value="{{ license }}" placeholder="License id">
+                                <input name="licenses" ng-model="license" placeholder="License id">
                                 <i class="circular remove link icon"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-                <input type="hidden" name="_id" value="{{ data._id }}">
+                <input type="hidden" name="_id" ng-model="data._id">
                 <button class="ui fluid basic teal add license button" type="button">
                     <i class="icon plus"></i> Add License id
                 </button>
                 <br>
-                <button class="ui fluid positive button" type="submit">Add</button>
+                <button class="ui fluid positive button" type="submit">Update</button>
             </form>
         </div>
     </div>

@@ -7,7 +7,7 @@
             <h1>My catch</h1>
         </div>
         <div class="eight wide column">
-            <button data-href="add-permit.php" class="ui labeled icon right floated blue button">
+            <button data-href="add-catch.php" class="ui labeled icon right floated blue button">
                 <i class="add icon"></i>
                 New catch
             </button>
@@ -20,7 +20,7 @@
               <div class="ui centered card" ng-repeat="data in datas">
                 <div class="content">
                   <div class="header">
-                    {{ data._id }}
+                    {{ data.date }}
                   </div>
                   <!--<div class="meta">
                     {{ data.year }}

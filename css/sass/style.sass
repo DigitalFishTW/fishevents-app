@@ -44,29 +44,64 @@ nav
   box-shadow: 1px 1px 10px 0px rgba(232, 232, 232, 0.75)
   
   ul
-    margin : 0
-    padding: 0
+    display: table
     width: 100%
+    margin: 0
+    height: 100%
+    padding: 0
     
-    li
-      max-height: 50px
-      display: inline-flex
-      align-items: center
-      padding: 1em
+  li
+    display: table-cell
+    vertical-align: middle
+    text-align: center
+    
+    //&:hover
+    //  background-color: #EEE
+  
+    &.brand
+      text-align: left
+    
+    &.sidebar
+      width: 50px
+      cursor: pointer
       
       &:hover
-        background-color: #EEE
+        opacity: 0.6
       
-      &.brand
-        text-transform: uppercase
-        font-weight: 500 !important
-      
-      &.right
-        float: right
-        height: 50px
     
-    .avatar
-      margin-right: .8em !important
+    &.right
+      text-align: right
+      padding: 0 12px
+      
+      //&:hover
+      //  opacity: 0.6
+  
+  
+  
+  //ul
+  //  margin : 0
+  //  padding: 0
+  //  width: 100%
+  //  
+  //  li
+  //    max-height: 50px
+  //    display: inline-flex
+  //    align-items: center
+  //    padding: 1em
+  //    
+  //    &:hover
+  //      background-color: #EEE
+  //    
+  //    &.brand
+  //      text-transform: uppercase
+  //      font-weight: 500 !important
+  //    
+  //    &.right
+  //      float: right
+  //      height: 50px
+  //  
+  //  .avatar
+  //    margin-right: .8em !important
       
 
 // Section

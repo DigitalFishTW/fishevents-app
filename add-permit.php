@@ -347,7 +347,7 @@ app.controller('addPermit', function($scope, $http, $window)
                     <label></label>
                 </div>
             </div>
-            <button class="ui fluid positive button" type="submit">Add</button>
+            <button class="ui fluid primary button" type="submit">Add</button>
         </form>
     </div>
     <p>&nbsp;</p>
@@ -357,7 +357,9 @@ app.controller('addPermit', function($scope, $http, $window)
         $('form').on('submit', function()
         {
             var data  = $('form').serializeObject();
-        
+            
+            $('.primary.button').addClass('loading').attr('disabled', 'disabled')
+            
            $.ajax({
                url     : 'https://fishevents-api-chown9835.c9users.io/permit?token=' + $.cookie('token'),
                contentType: 'application/json',
@@ -366,11 +368,22 @@ app.controller('addPermit', function($scope, $http, $window)
                dataType: 'json',
                success: function(msg)
                {
+                    $('.primary.button').removeClass('loading primary')
+                                        .addClass('positive')
+                                        .text('Added successfully!')
                     
+                    setTimeout(function()
+                    {
+                        $('.positive.button').text('Add')
+                                             .removeClass('positive')
+                                             .addClass('primary')
+                                             .removeAttr('disabled')
+                    }, 1500)
                },
                 error: function(xhr, ajaxOptions, thrownError)
                 { 
-
+                    $('.primary.button').removeClass('loading')
+                                        .removeAttr('disabled')
                 }
            });
         })

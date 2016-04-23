@@ -1,9 +1,21 @@
 <?php include 'php/templates/header.php'; ?>
-<?php if(isset($_GET['id'])) { ?>$scope.data = response.data;<?php } else { ?>
-        $scope.data = {};
-        $scope.data.chars = ['']
-        <?php } ?>    
-<div class="ui text container"addBoat>
+<script>
+app.controller('addBoat', function($scope, $http, $window)
+{
+    
+    $http.get('https://fishevents-api-chown9835.c9users.io/vessel/<?= $_GET['id']; ?>?token=' + $.cookie('token'))
+    .then(function(response)
+    {
+        <?php if(isset($_GET['id'])) { ?>
+        $scope.data = response.data;
+        <?php } ?>
+    });
+    
+});
+</script>
+
+
+<div class="ui text container" ng-controller="addBoat">
     <p>&nbsp;</p>
     <div class="ui segments" style="max-width: 650px; margin: 0 auto">
         <div class="ui blue inverted segment" style="max-width: 650px; margin: 0 auto">

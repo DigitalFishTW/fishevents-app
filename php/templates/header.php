@@ -15,7 +15,7 @@
 <script>
 $(function()
 {
-    $('.ui.dropdown').dropdown()
+    // $('.ui.dropdown').dropdown()
     $('[data-href]').on('click', function(e)
     {
         e.preventDefault()
@@ -81,7 +81,7 @@ $(function()
             </a>
             <a class="item">
                 <i class="icon flag"></i>
-                Trackers
+                Tracks
             </a>
             <a href="my-boats.php" class="item">
                 <i class="icon anchor"></i>

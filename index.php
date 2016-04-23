@@ -27,21 +27,21 @@
             <img class="ui tiny centered image" src="images/icons/boat-owner.svg" style="height: 90px; opacity: 0.5">
             <h3 class="ui center aligned header" style="color: #585858">
                 Shipowners
-                <div class="sub header" style="color: #989898">To show their catch, register their boats, track their own paths.</div>
+                <div class="sub header" style="color: #989898">To manage their own vessels, and tracks.</div>
             </h3>
         </div>
         <div class="column">
             <img class="ui tiny centered image" src="images/icons/gov.svg" style="height: 90px; opacity: 0.5">
             <h3 class="ui center aligned header" style="color: #585858">
-                Government officials
-                <div class="sub header" style="color: #989898">To show their catch, register their boats, track their own paths.</div>
+                Governors
+                <div class="sub header" style="color: #989898">For governors to manage vessels, catch, and permits.</div>
             </h3>
         </div>
         <div class="column">
             <img class="ui tiny centered image" src="images/icons/researcher.svg" style="height: 90px; opacity: 0.5">
             <h3 class="ui center aligned header" style="color: #585858">
                 Researchers
-                <div class="sub header" style="color: #989898">To show their catch, register their boats, track their own paths.</div>
+                <div class="sub header" style="color: #989898">To view the catch and fish speices.</div>
             </h3>
         </div>
     </div>
