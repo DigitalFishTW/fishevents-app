@@ -30,14 +30,9 @@
             e.preventDefault()
             $('.negative.message').addClass('hidden')
             
-            
-            
             $.ajax({
-                url: 'http://fishevents-api-chown9835.c9users.io/auth/',
-                data: {
-                            'username': $('[name="username"]').val(), 
-                            'password': $('[name="password"]').val()
-                },
+                url: 'https://fishevents-api-chown9835.c9users.io/auth?username=' + $('[name="username"]').val() + '&password=' 
+                                                                                  + $('[name="password"]').val(),
                 type    : "GET",
                 dataType: 'json',
 

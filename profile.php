@@ -14,7 +14,7 @@
                 <label>Name</label>
                 <div class="three fields">
                     <div class="field">
-                        <input type="text" name="name[first]" placeholder="First Name">
+                        <input type="text" name="first_name" placeholder="First Name">
                     </div>
                     <div class="field">
                         <input type="text" name="middle_name" placeholder="Middle Name">
@@ -397,32 +397,24 @@
                     </div>
                 </div>
             </div>
-            <div class="field">
+            <div class="main phone field">
                 <label>Phone</label>
-                <div class="fields">
+                <div class="phone fields">
                     <div class="six wide field">
                         <div class="ui input">
-                            <input name="phones[0][title]" placeholder="Phone name">
+                            <input name="phones[title]" placeholder="Phone name">
                         </div>
                     </div>
                     <div class="ten wide field">
                         <div class="ui input">
-                            <input name="phones[0][phone]" placeholder="Phone number">
+                            <input name="phones[phone]" placeholder="Phone number">
                         </div>
                     </div>
                 </div>
-                <br>
-                <br>
-                <div class="ui icon input">
-                    <input name="phones[0]" placeholder="Phone number">
-                    <i class="circular remove link icon"></i>
-                </div>
-                <br>
-                <br>
-                <button class="ui fluid basic black button" type="submit">
+            </div>
+            <button class="ui fluid basic teal add phone button" type="button">
                     <i class="icon plus"></i> Add another phone
                 </button>
-            </div>
             <h2 class="ui dividing header">Licenses</h2>
             <div class="field">
                 <label>License id</label>
@@ -435,66 +427,50 @@
                     <i class="icon plus"></i> Add another license id
                 </button>
             </div>
-            <h2 class="ui dividing header">Almost there..</h2>
-            <button class="ui fluid positive button" type="submit">Sign up</button>
+            <button class="ui fluid positive button" type="submit">Save</button>
         </form>
     </div>
     <p>&nbsp;</p>
     <script>
-    $(function(){
-        (function($) {
-    "use strict";
-    $.fn.jsonSerialize = function() {
-        var json = {};
-        var array = $(this).serializeArray();
-        $.each(array, function(key, obj) {
-            var value = (obj.value == "") ? false : obj.value;
-            if(value) {
-                // check if we have a number
-                var isNum = /^\d+$/.test(value);
-                if(isNum) value = parseFloat(value);
-                // check if we have a boolean
-                var isBool = /^(false|true)+$/.test(value);
-                if(isBool) value = (value!=="false");
-            }
-            json[obj.name] = value;
-        });
-        return json;
-    }
-})(jQuery);
-    })
-        
-
-
     
-        
+        $('.add.phone.button').on('click', function()
+        {
+            $('.phone.fields').eq(0)
+                              .clone()
+                              .appendTo($('.main.phone.field'))
+        })
+    
+    
        $('form').on('submit', function(e)
        {
            e.preventDefault()
            $('.negative.message').addClass('hidden')
-           
-            var data = $('form').jsonSerialize()
-           
-            data.birth = $('form [name="year"]').val() + '-' + $('form [name="month"]').val() + '-' + $('form [name="day"]').val()
-           
-            data.name = {'fist'  : $('form [name="first_name"]').val(),
-                         'middle': $('form [name="middle_name"]').val(),
-                         'last'  : $('form [name="last_name"]').val()
-            }
+            $.fn.serializeObject = function()
+            {
+                var o = {};
+                var a = this.serializeArray();
+                $.each(a, function() {
+                    if (o[this.name] !== undefined) {
+                        if (!o[this.name].push) {
+                            o[this.name] = [o[this.name]];
+                        }
+                        o[this.name].push(this.value || '');
+                    } else {
+                        o[this.name] = this.value || '';
+                    }
+                });
+                return o;
+            };
             
-            var data = new FormData($('form')[0]);
 
-
+            var phones = {}
+            
+            
 
 
            $.ajax({
-               url: 'http://fishevents-php-yamiodymel.c9users.io/application/profile',
-               //data: JSON.stringify(data),
-               //data: data,
-               data: $('form').serialize(),
-               processData: false,
-               //contentType: 'application/json; charset=utf-8',
-               //contentType: false,
+               url     : 'https://fishevents-api-chown9835.c9users.io/auth/' + $.cookie('username'),
+               data    : JSON.stringify($('form').serializeObject()),
                type    : "PUT",
                dataType: 'json',
                success: function(msg)

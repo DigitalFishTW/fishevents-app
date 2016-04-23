@@ -7,6 +7,7 @@
 <script src="js/jquery-2.2.3.min.js"></script>
 <script src="js/jquery-cookie.js"></script>
 <script src="js/gmaps.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
 <!--<script src="https://maps.googleapis.com/maps/api/js"></script>-->
 <script src="css/Semantic-UI/dist/semantic.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/Semantic-UI/dist/semantic.min.css">
@@ -26,7 +27,7 @@ $(function()
     
 </script>
 </head>
-<body>
+<body ng-app="fishEvents">
     <!-- 左側選單 -->
     <aside>
         <div class="ui large fluid vertical inverted blue menu">
@@ -38,7 +39,11 @@ $(function()
                 <i class="icon flag"></i>
                 Journeys
             </a>
-            <a class="item">
+            <a href="my-boats.php" class="item">
+                <i class="icon anchor"></i>
+                My boats
+            </a>
+            <a href="catch.php" class="item">
                 <i class="icon trophy"></i>
                 Catch
             </a>

@@ -31,7 +31,7 @@
             $('.negative.message').addClass('hidden')
             
             $.ajax({
-                url: 'http://fishevents-api-chown9835.c9users.io/auth/',
+                url: 'https://fishevents-api-chown9835.c9users.io/auth',
                 data: {
                         'username': $('[name="username"]').val(), 
                         'password': $('[name="password"]').val()
@@ -41,6 +41,7 @@
 
                 success: function(msg)
                 {
+                    window.location.href = "my-account.php?welcome=true"
                     $('.negative.message').addClass('hidden')
                 },
                  error: function(xhr, ajaxOptions, thrownError)

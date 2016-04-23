@@ -3,8 +3,23 @@
 <div class="ui text container">
     <p>&nbsp;</p>
     <div class="ui grid">
+        
+        <?php if(isset($_GET['welcome'])) { ?>
         <div class="sixteen wide column">
-            <h2 class="ui header">
+            <h2 class="ui icon center aligned teal header">
+                <i class="child icon"></i>
+                <div class="content">
+                    Yeah! Thanks for join us!
+                </div>
+                <div class="sub header">
+                    In this place, you can describe who you are, or what kind of the boat you have.
+                </div>
+            </h2>
+        </div>
+        <?php } ?>
+        
+        <div class="sixteen wide column">
+            <h2 class="ui teal header">
                 <i class="user icon"></i>
                 <div class="content">
                     Account settings
@@ -13,7 +28,7 @@
         </div>
         
         <div class="sixteen wide column">
-            <div class="ui cards">
+            <div class="ui teal cards">
                 <a href="profile.php?edit=true" class="link card">
                     <div class="content">
                         <div class="header"><i class="edit icon"></i>Edit profile</div>
