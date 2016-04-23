@@ -418,7 +418,7 @@
                     <div class="ten wide field">
                         <div class="ui icon input">
                             <input name="phones[number]" placeholder="Phone number">
-                            <i class="circular remove link icon"></i>
+                            <i class="circular remove link icon" style="display: none"></i>
                         </div>
                     </div>
                 </div>
@@ -433,7 +433,7 @@
                     <div class="sixteen wide field">
                         <div class="ui icon input">
                             <input name="licenses" placeholder="License id">
-                            <i class="circular remove link icon"></i>
+                            <i class="circular remove link icon" style="display: none"></i>
                         </div>
                     </div>
                 </div>
@@ -454,18 +454,33 @@
                                              .clone()
             
             $newField.find('input').val('')
+            $newField.find('.icon.link').css('display', 'inline-block')
             $newField.appendTo($('.main.phone.field'))
+            
+            $('.phone.field .remove').on('click', function()
+            {
+                $(this).parent().parent().parent().remove()
+            })
         })
         
         
         $('.add.license.button').on('click', function()
         {
             var $newField = $('.license.fields').eq(0)
-                                             .clone()
+                                                .clone()
             
             $newField.find('input').val('')
+            $newField.find('.icon.link').css('display', 'inline-block')
             $newField.appendTo($('.main.license.field'))
+            
+            $('.license.field .remove').on('click', function()
+            {
+                $(this).parent().parent().parent().remove()
+            })
         })
+        
+        
+        
     
     
        $('form').on('submit', function(e)
