@@ -1,24 +1,9 @@
 <?php include 'php/templates/header.php'; ?>
-
-
-<script>
-app.controller('addBoat', function($scope, $http, $window)
-{
-    
-    $http.get('https://fishevents-api-chown9835.c9users.io/vessel/<?= $_GET['id']; ?>?token=' + $.cookie('token'))
-    .then(function(response)
-    {
-        
-        <?php if(isset($_GET['id'])) { ?>
-        $scope.data = response.data;
-        <?php } ?>
-    });
-    
-});
-</script>
-
-
-<div class="ui text container" ng-controller="addBoat">
+<?php if(isset($_GET['id'])) { ?>$scope.data = response.data;<?php } else { ?>
+        $scope.data = {};
+        $scope.data.chars = ['']
+        <?php } ?>    
+<div class="ui text container"addBoat>
     <p>&nbsp;</p>
     <div class="ui segments" style="max-width: 650px; margin: 0 auto">
         <div class="ui blue inverted segment" style="max-width: 650px; margin: 0 auto">
@@ -35,32 +20,32 @@ app.controller('addBoat', function($scope, $http, $window)
                 <div class="field">
                     <label>Name</label>
                     <div class="ui input">
-                        <input type="text" name="name" value="{{ data.name }}" placeholder="Boat name">
+                        <input type="text" name="name" placeholder="Boat name">
                     </div>
                 </div>
                 <div class="fields">
                     <div class="four wide field">
                         <label>Deadweight</label>
                         <div class="ui input">
-                            <input type="text" name="deadweight" value="{{ data.deadweight }}" placeholder="Deadweight">
+                            <input type="text" name="deadweight" placeholder="Deadweight">
                         </div>
                     </div>
                     <div class="four wide field">
                         <label>Gross tonnage</label>
                         <div class="ui input">
-                            <input type="text" name="gross_tonnage" value="{{ data.gross_tonnage }}" placeholder="Gross tonnage">
+                            <input type="text" name="gross_tonnage" placeholder="Gross tonnage">
                         </div>
                     </div>
                     <div class="four wide field">
                         <label>Length</label>
                         <div class="ui input">
-                            <input type="text" name="length" value="{{ data.length }}" placeholder="Length">
+                            <input type="text" name="length" placeholder="Length">
                         </div>
                     </div>
                     <div class="four wide field">
                         <label>Breadth</label>
                         <div class="ui input">
-                            <input type="text" name="breadth" value="{{ data.breadth }}" placeholder="Breadth">
+                            <input type="text" name="breadth" placeholder="Breadth">
                         </div>
                     </div>
                 </div>
@@ -68,13 +53,13 @@ app.controller('addBoat', function($scope, $http, $window)
                     <div class="four wide field">
                         <label>IMO</label>
                         <div class="ui input">
-                            <input type="text" name="imo" value="{{ data.img }}" placeholder="IMO">
+                            <input type="text" name="imo" placeholder="IMO">
                         </div>
                     </div>
                     <div class="four wide field">
                         <label>MMSI</label>
                         <div class="ui input">
-                            <input type="text" name="mmsi" value="{{ data.mmsi }}" placeholder="MMSI">
+                            <input type="text" name="mmsi" placeholder="MMSI">
                         </div>
                     </div>
                     <div class="four wide field">
@@ -106,13 +91,13 @@ app.controller('addBoat', function($scope, $http, $window)
                     <div class="four wide field">
                         <label>Radio</label>
                         <div class="ui input">
-                            <input type="text" name="radio" value="{{ data.radio }}" placeholder="Radio">
+                            <input type="text" name="radio" placeholder="Radio">
                         </div>
                     </div>
                     <div class="twelve wide field">
                         <label>Identify</label>
                         <div class="ui input">
-                            <input type="text" name="identify" value="{{ data.identify }}" placeholder="Identify">
+                            <input type="text" name="identify" placeholder="Identify">
                         </div>
                     </div>
                 </div>
@@ -121,16 +106,13 @@ app.controller('addBoat', function($scope, $http, $window)
                     <div class="ten wide field">
                         <label>Home port</label>
                         <div class="ui input">
-                            <input type="text" name="home_port" value="{{ data.home_port }}" placeholder="Address">
+                            <input type="text" name="home_port" placeholder="Address">
                         </div>
                     </div>
                     <div class="six wide field">
                         <label>Flag</label>
                         <div class="ui fluid search selection dropdown">
-                            <input type="hidden" name="flag" value="{{data.flag}}">
-                            <script>
-                                //$('.ui.dropdown').dropdown('set selected', {{data.flag}});
-                            </script>
+                            <input type="hidden" name="flag"            >
                             <i class="dropdown icon"></i>
                             <div class="default text">Select Flag</div>
                             <div class="menu">
@@ -383,17 +365,17 @@ app.controller('addBoat', function($scope, $http, $window)
                 <div class="field">
                     <label>Status</label>
                     <div class="ui input">
-                        <input type="text" name="status" value="{{ data.status }}" placeholder="Status">
+                        <input type="text" name="status" placeholder="Status">
                     </div>
                 </div>
                 <h2 class="ui dividing header">Characteristics</h2>
                 <div class="main char field">
                     <label>Characteristics</label>
                     <div class="char fields">
-                        <div class="sixteen wide field" ng-repeat="char in data.chars">
+                        <div class="sixteen wide field">
                             <div class="ui icon input">
-                                <input name="chars" value="{{ char }}" placeholder="Characteristics">
-                                <i class="circular remove link icon"></i>
+                                <input name="chars" placeholder="Characteristics">
+                                <i class="circular remove link icon" style="display: none"></i>
                             </div>
                         </div>
                     </div>
@@ -405,10 +387,10 @@ app.controller('addBoat', function($scope, $http, $window)
                 <div class="main gear field">
                     <label>Gear name</label>
                     <div class="gear fields">
-                        <div class="sixteen wide field" ng-repeat="gear in data.gears">
+                        <div class="sixteen wide field">
                             <div class="ui icon input">
-                                <input name="gears" value="{{ gear }}" placeholder="Gear name">
-                                <i class="circular remove link icon"></i>
+                                <input name="gears" placeholder="Gear name">
+                                <i class="circular remove link icon" style="display: none"></i>
                             </div>
                         </div>
                     </div>
@@ -418,19 +400,18 @@ app.controller('addBoat', function($scope, $http, $window)
                 </button>
                 <h2 class="ui dividing header">Licenses</h2>
                 <div class="main license field">
-                    <label>License Id</label>
+                    <label>License ID</label>
                     <div class="license fields">
-                        <div class="sixteen wide field" ng-repeat="license in data.licenses">
+                        <div class="sixteen wide field">
                             <div class="ui icon input">
-                                <input name="licenses" value="{{ license }}" placeholder="License id">
-                                <i class="circular remove link icon"></i>
+                                <input name="licenses" placeholder="License id">
+                                <i class="circular remove link icon" style="display: none"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-                <input type="hidden" name="_id" value="{{ data._id }}">
-                <button class="ui fluid basic teal add license button" type="button">
-                    <i class="icon plus"></i> Add License id
+                    <button class="ui fluid basic teal add license button" type="button">
+                    <i class="icon plus"></i> Add license ID
                 </button>
                 <br>
                 <button class="ui fluid positive button" type="submit">Add</button>
@@ -439,13 +420,21 @@ app.controller('addBoat', function($scope, $http, $window)
     </div>
     <p>&nbsp;</p>
     <script>
+    $(function()
+    {
         $('.add.license.button').on('click', function()
         {
             var $newField = $('.license.fields').eq(0)
                                              .clone()
             
             $newField.find('input').val('')
+            $newField.find('.icon.link').css('display', 'inline-block')
             $newField.appendTo($('.main.license.field'))
+            
+            $('.license.field .remove').on('click', function()
+            {
+                $(this).parent().parent().parent().remove()
+            })
         })
         
         
@@ -455,7 +444,13 @@ app.controller('addBoat', function($scope, $http, $window)
                                              .clone()
             
             $newField.find('input').val('')
+            $newField.find('.icon.link').css('display', 'inline-block')
             $newField.appendTo($('.main.gear.field'))
+            
+            $('.gear.field .remove').on('click', function()
+            {
+                $(this).parent().parent().parent().remove()
+            })
         })
         
         
@@ -466,7 +461,13 @@ app.controller('addBoat', function($scope, $http, $window)
                                              .clone()
             
             $newField.find('input').val('')
+            $newField.find('.icon.link').css('display', 'inline-block')
             $newField.appendTo($('.main.char.field'))
+            
+            $('.char.field .remove').on('click', function()
+            {
+                $(this).parent().parent().parent().remove()
+            })
         })
         
         
@@ -497,9 +498,7 @@ app.controller('addBoat', function($scope, $http, $window)
             data.chars = chars;
             data.gears = gears;
             data.licenses = licenses;
-            
-            $('.positive.button').addClass('loading').attr('disabled', 'disabled')
-            
+
            $.ajax({
                url     : 'https://fishevents-api-chown9835.c9users.io/vessel?token=' + $.cookie('token'),
                contentType: 'application/json',
@@ -508,16 +507,15 @@ app.controller('addBoat', function($scope, $http, $window)
                dataType: 'json',
                success: function(msg)
                {
-                   $('.positive.button').removeClass('loading').removeAttr('disabled')
                    $('.negative.message').addClass('hidden')
                },
                 error: function(xhr, ajaxOptions, thrownError)
                 { 
-                    $('.positive.button').removeClass('loading').removeAttr('disabled')
                    $('.negative.message').removeClass('hidden')
                 }
            });
        })
+    })
        
        /*
         * TEAMEOW NOT FOUND:: 404;;;
