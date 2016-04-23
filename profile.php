@@ -502,7 +502,7 @@
                url     : 'https://fishevents-api-chown9835.c9users.io/profile?token=' + $.cookie('token'),
                contentType: 'application/json',
                data    : JSON.stringify(data),
-               type    : "PUT",
+               type    : "PATCH",
                dataType: 'json',
                success: function(msg)
                {
