@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8">
 <script src="js/jquery-2.2.3.min.js"></script>
+<script src="js/jquery-cookie.js"></script>
 <script src="js/gmaps.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <script src="css/Semantic-UI/dist/semantic.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/Semantic-UI/dist/semantic.min.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/index.css">
 <script>
 $(function()
 {
@@ -61,37 +61,13 @@ $(function()
                     Fish Events
                 </li>
                 <li class="right">
-                    <div class="ui floating labeled icon dropdown">
+                    <div class="ui icon dropdown">
                         <img class="ui avatar image" src="images/fake-avatar.png">
                         <span class="text">Yami Odymel</span>
-                        <div class="left menu">
-                        <div class="item">
-                          <i class="dropdown icon"></i>
-                          <span class="text">Left</span>
-                          <div class="menu">
-                            <div class="item">
-                              <i class="dropdown icon"></i>
-                              <span class="text">Still Left</span>
-                              <div class="menu">
-                                <div class="item">1</div>
-                                <div class="item">2</div>
-                                <div class="item">3</div>
-                              </div>
-                            </div>
-                            <div class="item">2</div>
-                            <div class="item">3</div>
-                          </div>
+                        <div class="menu">
+                            <div class="item"><i class="icon user"></i>Account settings</div>
+                            <div class="item"><i class="icon sign out"></i>Log out</div>
                         </div>
-                        <div class="item">
-                          <i class="dropdown icon"></i>
-                          <span class="text">Left 2</span>
-                          <div class="menu">
-                            <div class="item">1</div>
-                            <div class="item">2</div>
-                            <div class="item">3</div>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                 </li>
             </ul>

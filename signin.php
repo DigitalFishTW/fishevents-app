@@ -30,6 +30,8 @@
             e.preventDefault()
             $('.negative.message').addClass('hidden')
             
+            
+            
             $.ajax({
                 url: 'http://fishevents-api-chown9835.c9users.io/auth/',
                 data: {
@@ -37,10 +39,11 @@
                             'password': $('[name="password"]').val()
                 },
                 type    : "GET",
-                dataType:'text',
+                dataType: 'json',
 
-                success: function(msg)
+                success: function(data)
                 {
+                    $.cookie('token', data.token);
                     $('.negative.message').addClass('hidden')
                 },
                  error: function(xhr, ajaxOptions, thrownError)

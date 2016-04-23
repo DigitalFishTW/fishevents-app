@@ -3,26 +3,26 @@
 <div class="ui text container">
     <p>&nbsp;</p>
     <div class="ui segment" style="max-width: 350px; margin: 0 auto">
-        <img class="ui small centered image" src="images/logo.png">
         <h1 class="ui center aligned header">
-            Create an account
-            <div class="sub header">Hello! Welcome come to join us!</div>
+            Change Password
         </h1>
         <form class="ui form">
             <div class="field">
-                <label>Username</label>
-                <input type="text" name="username">
+                <label>Current password</label>
+                <input type="text" name="current_password">
             </div>
             <div class="field">
-              <label>Password</label>
-              <input type="password" name="password">
+                <label>New password</label>
+                <input type="text" name="password">
+            </div>
+            <div class="field">
+                <label>Confirm password</label>
+                <input type="text" name="confirm_password">
             </div>
             <div class="ui negative hidden message">
                 Username or password was incorrect.
             </div>
-            <button class="ui fluid blue button" type="submit">Sign up</button>
-            <br>
-            <button class="ui fluid button" type="submit" data-href="signin.php">I already have an account</button>
+            <button class="ui fluid teal button" type="submit">Sign in</button>
         </form>
         <script>
         $('form').on('submit', function(e)
@@ -30,17 +30,20 @@
             e.preventDefault()
             $('.negative.message').addClass('hidden')
             
+            
+            
             $.ajax({
                 url: 'http://fishevents-api-chown9835.c9users.io/auth/',
                 data: {
-                        'username': $('[name="username"]').val(), 
-                        'password': $('[name="password"]').val()
+                            'username': $('[name="username"]').val(), 
+                            'password': $('[name="password"]').val()
                 },
-                type    : "PUT",
+                type    : "GET",
                 dataType: 'json',
 
-                success: function(msg)
+                success: function(data)
                 {
+                    $.cookie('token', data.token);
                     $('.negative.message').addClass('hidden')
                 },
                  error: function(xhr, ajaxOptions, thrownError)

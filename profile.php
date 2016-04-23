@@ -29,7 +29,7 @@
                     <label>Birthday</label>
                     <div class="fields">
                         <div class="four wide field">
-                            <select class="ui fluid dropdown">
+                            <select name="day" class="ui fluid dropdown">
                                 <option value="">Day</option>
                                 <?php for($i = 1; $i < 31; $i++) { ?>
                                 <option value="<?= $i ?>"><?= $i ?></option>
@@ -37,7 +37,7 @@
                             </select>
                         </div>
                         <div class="six wide field">
-                            <select class="ui fluid dropdown">
+                            <select name="month" class="ui fluid dropdown">
                                 <option value="">Month</option>
                                 <option value="1">January</option>
                                 <option value="2">February</option>
@@ -54,7 +54,7 @@
                             </select>
                         </div>
                         <div class="six wide field">
-                            <select class="ui fluid dropdown">
+                            <select name="year" class="ui fluid dropdown">
                                 <option value="">Year</option>
                                 <?php for($i = date('Y'); $i > 1960; $i--) { ?>
                                 <option value="<?= $i ?>"><?= $i ?></option>
@@ -65,9 +65,9 @@
                 </div>
                 <div class="four wide field">
                     <label>Gender</label>
-                    <select class="ui fluid dropdown">
-                        <option value="">Male</option>
-                        <option value="">Female</option>
+                    <select name="gender" class="ui fluid dropdown">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
                     </select>
                 </div>
             </div>
@@ -89,7 +89,7 @@
             <div class="two fields">
                 <div class="field">
                     <label>State</label>
-                    <select name="state" class="ui fluid dropdown">
+                    <select name="states" class="ui fluid dropdown">
                         <option value="">State</option>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
@@ -399,8 +399,17 @@
             </div>
             <div class="field">
                 <label>Phone</label>
-                <div class="ui input">
-                    <input name="phones[0]" placeholder="Phone number">
+                <div class="fields">
+                    <div class="six wide field">
+                        <div class="ui input">
+                            <input name="phones[0][title]" placeholder="Phone name">
+                        </div>
+                    </div>
+                    <div class="ten wide field">
+                        <div class="ui input">
+                            <input name="phones[0][phone]" placeholder="Phone number">
+                        </div>
+                    </div>
                 </div>
                 <br>
                 <br>
@@ -431,6 +440,70 @@
         </form>
     </div>
     <p>&nbsp;</p>
+    <script>
+    $(function(){
+        (function($) {
+    "use strict";
+    $.fn.jsonSerialize = function() {
+        var json = {};
+        var array = $(this).serializeArray();
+        $.each(array, function(key, obj) {
+            var value = (obj.value == "") ? false : obj.value;
+            if(value) {
+                // check if we have a number
+                var isNum = /^\d+$/.test(value);
+                if(isNum) value = parseFloat(value);
+                // check if we have a boolean
+                var isBool = /^(false|true)+$/.test(value);
+                if(isBool) value = (value!=="false");
+            }
+            json[obj.name] = value;
+        });
+        return json;
+    }
+})(jQuery);
+    })
+        
+
+
+    
+        
+       $('form').on('submit', function(e)
+       {
+           e.preventDefault()
+           $('.negative.message').addClass('hidden')
+           
+            var data = $('form').jsonSerialize()
+           
+            data.birth = $('form [name="year"]').val() + '-' + $('form [name="month"]').val() + '-' + $('form [name="day"]').val()
+           
+            data.name = {'fist'  : $('form [name="first_name"]').val(),
+                         'middle': $('form [name="middle_name"]').val(),
+                         'last'  : $('form [name="last_name"]').val()
+            }
+
+
+
+
+
+           $.ajax({
+               url: 'http://fishevents-api-chown9835.c9users.io/profile/?token=' + $.cookie('token'),
+               data: JSON.stringify(data),
+               processData: false,
+               contentType: 'application/json; charset=utf-8',
+               type    : "PUT",
+               dataType: 'json',
+               success: function(msg)
+               {
+                   $('.negative.message').addClass('hidden')
+               },
+                error: function(xhr, ajaxOptions, thrownError)
+                { 
+                   $('.negative.message').removeClass('hidden')
+                }
+           });
+       })
+    </script>
 </div>
     
 <?php include 'php/templates/footer.php'; ?>
