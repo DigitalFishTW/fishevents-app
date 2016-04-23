@@ -406,8 +406,9 @@
                         </div>
                     </div>
                     <div class="ten wide field">
-                        <div class="ui input">
-                            <input name="phones[phone]" placeholder="Phone number">
+                        <div class="ui icon input">
+                            <input name="phones[number]" placeholder="Phone number">
+                            <i class="circular remove link icon"></i>
                         </div>
                     </div>
                 </div>
@@ -416,17 +417,21 @@
                     <i class="icon plus"></i> Add another phone
                 </button>
             <h2 class="ui dividing header">Licenses</h2>
-            <div class="field">
+            <div class="main license field">
                 <label>License id</label>
-                <div class="ui input">
-                    <input name="licenses[0]" placeholder="License id">
+                <div class="license fields">
+                    <div class="sixteen wide field">
+                        <div class="ui icon input">
+                            <input name="licenses" placeholder="License id">
+                            <i class="circular remove link icon"></i>
+                        </div>
+                    </div>
                 </div>
-                <br>
-                <br>
-                <button class="ui fluid basic black button" type="submit">
-                    <i class="icon plus"></i> Add another license id
-                </button>
             </div>
+            <button class="ui fluid basic teal add license button" type="button">
+                <i class="icon plus"></i> Add another license id
+            </button>
+            <br>
             <button class="ui fluid positive button" type="submit">Save</button>
         </form>
     </div>
@@ -435,9 +440,21 @@
     
         $('.add.phone.button').on('click', function()
         {
-            $('.phone.fields').eq(0)
-                              .clone()
-                              .appendTo($('.main.phone.field'))
+            var $newField = $('.phone.fields').eq(0)
+                                             .clone()
+            
+            $newField.find('input').val('')
+            $newField.appendTo($('.main.phone.field'))
+        })
+        
+        
+        $('.add.license.button').on('click', function()
+        {
+            var $newField = $('.license.fields').eq(0)
+                                             .clone()
+            
+            $newField.find('input').val('')
+            $newField.appendTo($('.main.license.field'))
         })
     
     
@@ -463,14 +480,32 @@
             };
             
 
-            var phones = {}
+            var phoneTitles  = $("input[name=\"phones[title]\"]").map(function(){return $(this).val();}).get();
+            var phoneNumbers = $("input[name=\"phones[number]\"]").map(function(){return $(this).val();}).get();
+            var phones       = []
+            var licenseIds   = $("input[name=\"licenses\"]").map(function(){return $(this).val();}).get();
+            var licenses     = []
             
+            for(var i = 0; i < phoneTitles.length; i++)
+            {
+                phones.push({title: phoneTitles[i], 
+                             phone: phoneNumbers[i]})
+            }
             
+            for(var i = 0; i < licenseIds.length; i++)
+            {
+                licenses.push(licenseIds[i])
+            }
+            
+            var data    = $('form').serializeObject();
+            data.phones = phones;
+            
+            data.licenses = licenses;
 
 
            $.ajax({
-               url     : 'https://fishevents-api-chown9835.c9users.io/auth/' + $.cookie('username'),
-               data    : JSON.stringify($('form').serializeObject()),
+               url     : 'https://fishevents-api-chown9835.c9users.io/profile?token=' + $.cookie('token'),
+               data    : JSON.stringify(data),
                type    : "PUT",
                dataType: 'json',
                success: function(msg)
