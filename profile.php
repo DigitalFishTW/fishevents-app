@@ -71,6 +71,16 @@
                     </select>
                 </div>
             </div>
+            <div class="field">
+                <label>Who are you?</label>
+                <select name="type" class="ui fluid dropdown">
+                    <option value="">I am ..</option>
+                    <option value="fisherman">A fisherman, tried to register my boats, and catch.</option>
+                    <option value="researcher">A researcher.</option>
+                    <option value="government">I'm working under the government.</option>
+                    <option value="boat_owner">I have a boat, and I want to log my boats.</option>
+                </select>
+            </div>
             <h2 class="ui dividing header">Contant</h2>
             <div class="fields">
                 <div class="eight wide field">
@@ -414,8 +424,8 @@
                 </div>
             </div>
             <button class="ui fluid basic teal add phone button" type="button">
-                    <i class="icon plus"></i> Add another phone
-                </button>
+                <i class="icon plus"></i> Add another phone
+            </button>
             <h2 class="ui dividing header">Licenses</h2>
             <div class="main license field">
                 <label>License id</label>
@@ -462,24 +472,7 @@
        {
            e.preventDefault()
            $('.negative.message').addClass('hidden')
-            $.fn.serializeObject = function()
-            {
-                var o = {};
-                var a = this.serializeArray();
-                $.each(a, function() {
-                    if (o[this.name] !== undefined) {
-                        if (!o[this.name].push) {
-                            o[this.name] = [o[this.name]];
-                        }
-                        o[this.name].push(this.value || '');
-                    } else {
-                        o[this.name] = this.value || '';
-                    }
-                });
-                return o;
-            };
             
-
             var phoneTitles  = $("input[name=\"phones[title]\"]").map(function(){return $(this).val();}).get();
             var phoneNumbers = $("input[name=\"phones[number]\"]").map(function(){return $(this).val();}).get();
             var phones       = []

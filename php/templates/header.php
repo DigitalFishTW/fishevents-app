@@ -7,8 +7,8 @@
 <script src="js/jquery-2.2.3.min.js"></script>
 <script src="js/jquery-cookie.js"></script>
 <script src="js/gmaps.js"></script>
-<script src="bower_components/angular/angular.min.js"></script>
-<!--<script src="https://maps.googleapis.com/maps/api/js"></script>-->
+<!--<script src="bower_components/angular/angular.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js"></script>-->
 <script src="css/Semantic-UI/dist/semantic.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/Semantic-UI/dist/semantic.min.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -16,13 +16,30 @@
 $(function()
 {
     $('.ui.dropdown').dropdown()
-    
+    $('.ui.dropdown').dropdown()
     $('[data-href]').on('click', function(e)
     {
         e.preventDefault()
         
         window.location.href = $(this).attr('data-href')
     })
+    
+    $.fn.serializeObject = function()
+    {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
 })
     
 </script>

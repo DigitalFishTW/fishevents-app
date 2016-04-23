@@ -7,7 +7,7 @@
             <h1>My vessels</h1>
         </div>
         <div class="eight wide column">
-            <button class="ui labeled icon right floated blue button">
+            <button data-href="add-boat.php" class="ui labeled icon right floated blue button">
                 <i class="add icon"></i>
                 New vessel
             </button>
