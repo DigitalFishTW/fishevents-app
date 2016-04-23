@@ -14,7 +14,7 @@
                 <label>Name</label>
                 <div class="three fields">
                     <div class="field">
-                        <input type="text" name="first_name" placeholder="First Name">
+                        <input type="text" name="name[first]" placeholder="First Name">
                     </div>
                     <div class="field">
                         <input type="text" name="middle_name" placeholder="Middle Name">
@@ -481,16 +481,20 @@
                          'middle': $('form [name="middle_name"]').val(),
                          'last'  : $('form [name="last_name"]').val()
             }
-
+            
+            var data = new FormData($('form')[0]);
 
 
 
 
            $.ajax({
-               url: 'http://fishevents-api-chown9835.c9users.io/profile/?token=' + $.cookie('token'),
-               data: JSON.stringify(data),
+               url: 'http://fishevents-php-yamiodymel.c9users.io/application/profile',
+               //data: JSON.stringify(data),
+               //data: data,
+               data: $('form').serialize(),
                processData: false,
-               contentType: 'application/json; charset=utf-8',
+               //contentType: 'application/json; charset=utf-8',
+               //contentType: false,
                type    : "PUT",
                dataType: 'json',
                success: function(msg)

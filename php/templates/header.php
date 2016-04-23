@@ -7,7 +7,7 @@
 <script src="js/jquery-2.2.3.min.js"></script>
 <script src="js/jquery-cookie.js"></script>
 <script src="js/gmaps.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js"></script>
+<!--<script src="https://maps.googleapis.com/maps/api/js"></script>-->
 <script src="css/Semantic-UI/dist/semantic.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/Semantic-UI/dist/semantic.min.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -30,7 +30,7 @@ $(function()
     <!-- 左側選單 -->
     <aside>
         <div class="ui large fluid vertical inverted blue menu">
-            <a class="item">
+            <a href="dashboard.php" class="item">
                 <i class="icon dashboard"></i>
                 Dashboard
             </a>
@@ -65,8 +65,8 @@ $(function()
                         <img class="ui avatar image" src="images/fake-avatar.png">
                         <span class="text">Yami Odymel</span>
                         <div class="menu">
-                            <div class="item"><i class="icon user"></i>Account settings</div>
-                            <div class="item"><i class="icon sign out"></i>Log out</div>
+                            <a href="my-account.php" class="item"><i class="icon user"></i>Account settings</a>
+                            <a href="logout.php" class="item"><i class="icon sign out"></i>Log out</a>
                         </div>
                     </div>
                 </li>

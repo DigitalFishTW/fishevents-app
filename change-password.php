@@ -9,20 +9,20 @@
         <form class="ui form">
             <div class="field">
                 <label>Current password</label>
-                <input type="text" name="current_password">
+                <input type="password" name="current_password">
             </div>
             <div class="field">
                 <label>New password</label>
-                <input type="text" name="password">
+                <input type="password" name="password">
             </div>
             <div class="field">
                 <label>Confirm password</label>
-                <input type="text" name="confirm_password">
+                <input type="password" name="confirm_password">
             </div>
             <div class="ui negative hidden message">
                 Username or password was incorrect.
             </div>
-            <button class="ui fluid teal button" type="submit">Sign in</button>
+            <button class="ui fluid blue button" type="submit">CHANGE</button>
         </form>
         <script>
         $('form').on('submit', function(e)
@@ -38,7 +38,7 @@
                             'username': $('[name="username"]').val(), 
                             'password': $('[name="password"]').val()
                 },
-                type    : "GET",
+                type    : "PATCH",
                 dataType: 'json',
 
                 success: function(data)
