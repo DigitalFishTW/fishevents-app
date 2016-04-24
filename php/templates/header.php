@@ -106,11 +106,16 @@ $(function()
         <!-- 置頂選單 -->
         <nav ng-controller="header">
             <ul>
+                <?php if($_COOKIE['token']) { ?>
                 <li class="sidebar button">
                     <i class="icon sidebar"></i>
                 </li>
+                <?php } else {?>
+                    <li class="sidebar" style="cursor: inherit;">
+                    </li>
+                <?php } ?>
                 <li class="brand">
-                    Fish Events
+                    <a href="/index.php" style="color: #626262;">Fish Events</a>
                 </li>
                 <li class="right">
                     <div class="ui icon simple dropdown">
