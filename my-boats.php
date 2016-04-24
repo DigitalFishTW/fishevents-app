@@ -27,7 +27,7 @@
                   </div>
                 </div>
                 <div class="extra content">
-                    <a href="add-boat.php?id={{ data._id }}" class="ui teal fluid button">
+                    <a href="modify-boat.php?id={{ data._id }}" class="ui teal fluid button">
                         Edit
                         <i class="right chevron icon"></i>
                     </a>

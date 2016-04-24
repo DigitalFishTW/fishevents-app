@@ -8,6 +8,8 @@ app.controller('addPermit', function($scope, $http, $window)
     {
         <?php if(isset($_GET['id'])) { ?>
         $scope.data = response.data;
+        
+        setTimeout(function(){$('.ui.dropdown').dropdown()}, 0)
          <?php } ?>
     });
    
@@ -33,7 +35,7 @@ app.controller('addPermit', function($scope, $http, $window)
                 <div class="six wide field">
                     <label>Country</label>
                     <div class="ui fluid search selection dropdown">
-                        <input type="hidden" name="country_code" value="{{data.country_code}}">
+                        <input type="hidden" name="country_code" value="{{ data.country_code }}">
                         <i class="dropdown icon"></i>
                         <div class="default text">Select Flag</div>
                         <div class="menu">
@@ -347,13 +349,17 @@ app.controller('addPermit', function($scope, $http, $window)
                     <label></label>
                 </div>
             </div>
-            <button class="ui fluid primary button" type="submit">Add</button>
+            <button class="ui fluid primary button" type="submit"><?= isset($_GET['id']) ? 'Edit' : 'Add'; ?></button>
         </form>
     </div>
     <p>&nbsp;</p>
     <script>
     $(function()
     {
+        <?php if(!isset($_GET['id'])) { ?>
+        $('.ui.dropdown').dropdown()
+        <?php } ?>
+        
         $('form').on('submit', function()
         {
             var data  = $('form').serializeObject();
@@ -370,11 +376,11 @@ app.controller('addPermit', function($scope, $http, $window)
                {
                     $('.primary.button').removeClass('loading primary')
                                         .addClass('positive')
-                                        .text('Added successfully!')
+                                        .text('<?= isset($_GET['id']) ? 'Edited' : 'Added'; ?> successfully!')
                     
                     setTimeout(function()
                     {
-                        $('.positive.button').text('Add')
+                        $('.positive.button').text('<?= isset($_GET['id']) ? 'Edit' : 'Add'; ?>')
                                              .removeClass('positive')
                                              .addClass('primary')
                                              .removeAttr('disabled')

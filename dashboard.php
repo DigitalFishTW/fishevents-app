@@ -2,7 +2,7 @@
     
 <div class="ui text container">
     <p>&nbsp;</p>
-    <div class="ui grid">
+    <div class="ui stackable grid">
         <div class="sixteen wide column">
             <h1>Dashboard</h1>
         </div>
@@ -14,19 +14,19 @@
                     1
                 </div>
                 <div class="label">
-                    Journeys
+                    Tracks
                 </div>
             </div>
             </div>
         </div>
         <div class="four wide column">
-            <div class="ui teal inverted center aligned segment">
+            <div class="ui blue inverted center aligned segment">
                 <div class="ui inverted statistic">
                 <div class="value">
                   14
                 </div>
                 <div class="label">
-                  Journeys
+                  Vessels
                 </div>
             </div>
             </div>
@@ -35,10 +35,10 @@
             <div class="ui green inverted center aligned segment">
                 <div class="ui inverted statistic">
                 <div class="value">
-                  56
+                  32
                 </div>
                 <div class="label">
-                  Journeys
+                  Permits
                 </div>
             </div>
             </div>
@@ -64,7 +64,7 @@
         </script>
         
         <div class="sixteen wide column">
-            <h1>Your lastest catches</h1>
+            <h1>Your lastest catch</h1>
         </div>
         
         <div class="sixteen wide column">
@@ -74,7 +74,7 @@
                         <img src="images/logo.png">
                     </div>
                     <div class="middle aligned content">
-                        <a class="header">12 Years a Slave</a>
+                        <a class="header">2015-09-14 @Taiwan Strait</a>
                     </div>
                 </div>
                 <div class="item">
@@ -82,7 +82,7 @@
                       <img src="images/logo.png">
                     </div>
                     <div class="middle aligned content">
-                      <a class="header">My Neighbor Totoro</a>
+                      <a class="header">2015-09-13 @Taiwan Strait</a>
                     </div>
                   </div>
                   <div class="item">
@@ -90,7 +90,7 @@
                       <img src="images/logo.png">
                     </div>
                     <div class="middle aligned content">
-                      <a class="header">Watchmen</a>
+                      <a class="header">2015-06-25 @Pacific</a>
                     </div>
                 </div>
             </div>

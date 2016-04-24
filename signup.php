@@ -1,12 +1,12 @@
 <?php include 'php/templates/header.php'; ?>
-    
+<?php include 'php/templates/jumbotron.php'; ?>
+<p>&nbsp;</p>
 <div class="ui text container">
-    <p>&nbsp;</p>
     <div class="ui segment" style="max-width: 350px; margin: 0 auto">
-        <img class="ui small centered image" src="images/logo.png">
-        <h1 class="ui center aligned header">
+        <div></div>
+        <h1 class="ui center aligned header" style="color: #585858">
             Create an account
-            <div class="sub header">Hello! Welcome come to join us!</div>
+            <div class="sub header" style="color: #989898">Hello! Welcome come to join us!</div>
         </h1>
         <form class="ui form">
             <div class="field">

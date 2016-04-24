@@ -20,7 +20,7 @@
               <div class="ui centered card" ng-repeat="data in datas">
                 <div class="content">
                   <div class="header">
-                    {{ data.date }}
+                    {{ date | date:'yyyy-MM-dd' }}
                   </div>
                   <!--<div class="meta">
                     {{ data.year }}
@@ -42,6 +42,7 @@
             $http.get('https://fishevents-api-chown9835.c9users.io/catch?token=' + $.cookie('token') + '&offset=0&limit=20')
             .then(function(response)
             {
+                $scope.date = new Date();
                 $scope.datas = response.data;
             });
         });

@@ -12,10 +12,11 @@
 <script src="css/Semantic-UI/dist/semantic.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/Semantic-UI/dist/semantic.min.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript" src="bower_components/fast-json-patch/dist/json-patch-duplex.min.js"></script>
 <script>
 $(function()
 {
-    // $('.ui.dropdown').dropdown()
+    //$('.ui.dropdown').dropdown()
     $('[data-href]').on('click', function(e)
     {
         e.preventDefault()
@@ -79,7 +80,7 @@ $(function()
                 <i class="icon dashboard"></i>
                 Dashboard
             </a>
-            <a class="item">
+            <a href="my-tracks.php" class="item">
                 <i class="icon flag"></i>
                 Tracks
             </a>

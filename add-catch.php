@@ -1,13 +1,14 @@
 <?php include 'php/templates/header.php'; ?>
 
 <script>
-app.controller('addCatch', function($scope, $http, $window)
+app.controller('addCatch', function($scope, $http, $rootScope)
 {
     $http.get('https://fishevents-api-chown9835.c9users.io/catch/<?= $_GET['id']; ?>?token=' + $.cookie('token'))
     .then(function(response)
     {
         <?php if(isset($_GET['id'])) { ?>
         $scope.data = response.data;
+        $rootScope.globalData = response.data;
          <?php } ?>
     });
    
@@ -28,25 +29,25 @@ app.controller('addCatch', function($scope, $http, $window)
                 <div class="four wide field">
                     <label>Weight</label>
                     <div class="ui input">
-                        <input type="text" name="weight" value="{{ data.weight }}" placeholder="Weight">
+                        <input type="text" name="weight" value="{{ data.species.weight }}" placeholder="Weight">
                     </div>
                 </div>
                 <div class="four wide field">
                     <label>Amount</label>
                     <div class="ui input">
-                        <input type="text" name="counts" value="{{ data.counts }}" placeholder="Amount">
+                        <input type="text" name="counts" value="{{ data.total.counts }}" placeholder="Amount">
                     </div>
                 </div>
                 <div class="four wide field">
                     <label>Pricing</label>
                     <div class="ui input">
-                        <input type="text" name="pricing" value="{{ data.pricing }}" placeholder="Pricing">
+                        <input type="text" name="pricing" value="{{ data.species.pricing }}" placeholder="Pricing">
                     </div>
                 </div>
                 <div class="four wide field">
                     <label>For Sell</label>
                     <div class="ui toggle checkbox">
-                        <input type="checkbox" name="selling" ng-checked="{{ data.selling == "on" }}">
+                        <input type="checkbox" name="selling" ng-checked="data.selling" ng-true-value="on" ng-false-value="off">
                         <label></label>
                     </div>
                 </div>
@@ -93,14 +94,14 @@ app.controller('addCatch', function($scope, $http, $window)
                 <div class="four wide field">
                     <label>Sold</label>
                     <div class="ui input">
-                        <input type="text" name="sold" value="{{ data.sold }}" placeholder="Sold amount">
+                        <input type="text" name="sold" value="{{ data.species.sold }}" placeholder="Sold amount">
                     </div>
                 </div>
             </div>
             <div class="field" ng-controller="myPermits">
                 <label>Permit ID</label>
                 <div class="ui fluid search selection dropdown">
-                  <input type="hidden" name="permit">
+                  <input type="hidden" name="permit" value="{{ globalData.permit }}">
                   <i class="dropdown icon"></i>
                   <div class="default text">Select Permit ID</div>
                   <div class="menu">
@@ -114,11 +115,12 @@ app.controller('addCatch', function($scope, $http, $window)
                     .then(function(response)
                     {
                         $scope.datas = response.data;
+                        setTimeout(function(){$('.ui.dropdown').dropdown()}, 0)
                     });
                 });
                 </script>
             </div>
-            <button class="ui fluid primary button" type="submit">Add</button>
+            <button class="ui fluid primary button" type="submit"><?= isset($_GET['id']) ? 'Edit' : 'Add'; ?></button>
         </form>
     </div>
     <p>&nbsp;</p>
@@ -158,11 +160,11 @@ app.controller('addCatch', function($scope, $http, $window)
                {
                      $('.primary.button').removeClass('loading primary')
                                         .addClass('positive')
-                                        .text('Added successfully!')
+                                        .text('<?= isset($_GET['id']) ? 'Edited' : 'Added'; ?> successfully!')
                     
                     setTimeout(function()
                     {
-                        $('.positive.button').text('Add')
+                        $('.positive.button').text('<?= isset($_GET['id']) ? 'Edit' : 'Add'; ?>')
                                              .removeClass('positive')
                                              .addClass('primary')
                                              .removeAttr('disabled')

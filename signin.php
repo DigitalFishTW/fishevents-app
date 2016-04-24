@@ -1,12 +1,12 @@
 <?php include 'php/templates/header.php'; ?>
-    
+<?php include 'php/templates/jumbotron.php'; ?>
+<p>&nbsp;</p>
 <div class="ui text container">
-    <p>&nbsp;</p>
     <div class="ui segment" style="max-width: 350px; margin: 0 auto">
-        <img class="ui small centered image" src="images/logo.png">
-        <h1 class="ui center aligned header">
+        <div></div>
+        <h1 class="ui center aligned header" style="color: #585858">
             Welcome Back!
-            <div class="sub header">We're always here.</div>
+            <div class="sub header" style="color: #989898">We're always here.</div>
         </h1>
         <form class="ui form">
             <div class="field">
@@ -33,6 +33,8 @@
         $('form').on('submit', function(e)
         {
             e.preventDefault()
+            
+            $('.positive.button').addClass('loading').attr('disabled', 'disabled')
             $('.negative.message').addClass('hidden')
             
             $.ajax({
@@ -45,10 +47,14 @@
                 {
                     $.cookie('token', data.token);
                     $('.negative.message').addClass('hidden')
+                    $('.positive.button').removeClass('loading')
+                                        .text('Signed in successfully!')
                     window.location.href = "my-account.php"
                 },
                  error: function(xhr, ajaxOptions, thrownError)
                  { 
+                     $('.positive.button').removeClass('loading')
+                                          .removeAttr('disabled')
                     $('.negative.message').removeClass('hidden')
                  }
             });
